@@ -1,0 +1,176 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: url('../images/background.jpg') no-repeat center center fixed; /* Add your background image here */
+    background-size: cover;
+    color: #292b2e;
+    text-align: center;
+    padding-bottom: 50px; /* Prevents content from hiding behind the fixed footer */
+}
+/* Header Styles */
+header {
+    background: #4caf50; /* Semi-transparent green */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Navigation Styles */
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2); /* Light white on hover */
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+}
+
+/* Form Styles for Login and Create Account Pages */
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    background: rgba(87, 96, 230, 0.95); 
+    padding: 30px;
+    border-radius: 10px; /* Rounds the corners more */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Bold labels */
+}
+
+/* Ensure all input fields have consistent width */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;        /* Makes all inputs take full width of the container */
+    padding: 10px;      /* Adds padding for a consistent look */
+    box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    margin-bottom: 15px;    /* Adds spacing between fields */
+    font-size: 16px;        /* Ensures consistent font size */
+}
+input[type="text"]:focus,
+input[type="email"]:focus, /* Added focus effect for email */
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    border: 1px solid #4caf50; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+}
+button {
+    background: #4CAF50; /* Green background */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s; /* Smooth transition */
+    width: 100%; /* Full width button */
+}
+
+button:hover {
+    background: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly enlarges the button */
+}
+
+/* Link Styles */
+p {
+    margin-top: 20px; /* Space above the paragraph */
+}
+
+a {
+    color: #4caf50; /* Green color for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold links */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Column Layout for Products */
+.writing-tool-column,
+.notebook-column,
+.art-supply-column,
+.office-supply-column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.writing-tool-item,
+.notebook-item,
+.art-supply-item,
+.office-supply-item {
+    width: 220px; /* Adjust width as needed */
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid #4CAF50; /* Green border */
+    border-radius: 5px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+}
+
+.writing-tool-item img,
+.notebook-item img,
+.art-supply-item img,
+.office-supply-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+footer img {
+    width: 30px;
+    margin: 0 10px;
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .writing-tool-column,
+    .notebook-column,
+    .art-supply-column,
+    .office-supply-column {
+        flex-direction: column; /* Stack items on smaller screens */
+        align-items: center; /* Center align items */
+    }
+
+    .writing-tool-item,
+    .notebook-item,
+    .art-supply-item,
+    .office-supply-item {
+        width: 90%; /* Full width on small screens */
+    }
+    
+    form {
+        width: 90%; /* Full width on smaller screens */
+    }
+}

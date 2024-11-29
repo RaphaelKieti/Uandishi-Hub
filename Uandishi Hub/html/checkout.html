@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uandishi Hub - Checkout</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f4f9 0%, #e5e5f7 100%);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .summary {
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+        .summary h3 {
+            margin: 0;
+        }
+        .summary .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .checkout-button {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .checkout-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background-color: #E3E6F3;
+            color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            left: 0;
+        }
+        .navbar .logo img {
+            width: 90px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2d2d2d;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: #088178;
+        }
+        .nav-links a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: #088178;
+            width: 0;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .login-button {
+            background-color: #f7c731;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #2d2d2d;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .login-button:hover {
+            background-color: #ffb81c;
+            transform: translateY(-2px);
+        }
+        /* Add bold style to total cost and delivery date */
+        #total-cost, #delivery-date {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Uandishi Hub Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html">Cart</a>
+            <a href="login.html" class="login-button">Login</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Checkout</h1>
+        <!-- Shipping Address -->
+        <div class="form-group">
+            <label for="town">Town</label>
+            <select id="town" name="town" required onchange="updateTotal()">
+                <option value="">Select Town</option>
+                <option value="Nairobi" data-shipping="240" data-delivery="3">Nairobi - Ksh 240</option>
+                <option value="Mombasa" data-shipping="350" data-delivery="4">Mombasa - Ksh 350</option>
+                <option value="Kisumu" data-shipping="400" data-delivery="5">Kisumu - Ksh 400</option>
+                <option value="Nakuru" data-shipping="250" data-delivery="4">Nakuru - Ksh 250</option>
+                <option value="Eldoret" data-shipping="280" data-delivery="3">Eldoret - Ksh 280</option>
+                <option value="Thika" data-shipping="230" data-delivery="3">Thika - Ksh 230</option>
+                <option value="Nyeri" data-shipping="230" data-delivery="3">Nyeri - Ksh 230</option>
+                <option value="Meru" data-shipping="200" data-delivery="1">Meru - Ksh 200</option>
+                <option value="Machakos" data-shipping="270" data-delivery="3">Machakos - Ksh 270</option>
+                <option value="Naivasha" data-shipping="295" data-delivery="3">Naivasha - Ksh 295</option>
+            </select>
+        </div>
+        <!-- Payment Method -->
+        <div class="form-group">
+            <label for="mpesa-number">Mpesa Number</label>
+            <input type="text" id="mpesa-number" name="mpesa-number" required placeholder="0712345678" maxlength="10" pattern="^[0-9]{9}$" title="Enter your Mpesa number without the country code">
+        </div>
+        <!-- Order Summary -->
+        <div class="summary">
+            <h3>Order Summary</h3>
+            <div id="order-summary"></div>
+            <div class="summary-item">
+                <span>Shipping</span><span id="shipping-cost">Ksh 0</span>
+            </div>
+            <div class="summary-item">
+                <span>Total</span><span id="total-cost">Ksh 0</span>
+            </div>
+            <div class="summary-item">
+                <span>Expected Delivery</span><span id="delivery-date">-</span>
+            </div>
+        </div>
+        <!-- Final Confirmation -->
+        <button class="checkout-button" onclick="confirmOrder()">Place Order</button>
+    </div>
+    <script>
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function loadOrderSummary() {
+            const orderSummary = document.getElementById("order-summary");
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                orderSummary.innerHTML += `
+                    <div class="summary-item">
+                        <span>${item.name} (x${item.quantity})</span><span>Ksh ${item.price * item.quantity}</span>
+                    </div>
+                `;
+            });
+            document.getElementById("total-cost").textContent = `Ksh ${total}`;
+        }
+
+        function updateTotal() {
+            const town = document.getElementById("town");
+            const selectedTown = town.options[town.selectedIndex];
+            const shippingCost = parseInt(selectedTown.getAttribute("data-shipping")) || 0;
+            const deliveryDays = parseInt(selectedTown.getAttribute("data-delivery")) || 3;
+            const itemTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const total = itemTotal + shippingCost;
+
+            document.getElementById("shipping-cost").textContent = `Ksh ${shippingCost}`;
+            document.getElementById("total-cost").textContent = `Ksh ${total}`;
+
+            // Calculate and display the expected delivery date dynamically based on the selected town
+            const today = new Date();
+            today.setDate(today.getDate() + deliveryDays);
+            const deliveryDate = formatDate(today);
+            document.getElementById("delivery-date").textContent = deliveryDate;
+        }
+
+        function formatDate(date) {
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const day = days[date.getDay()];
+            const month = months[date.getMonth()];
+            const dayOfMonth = date.getDate();
+            const year = date.getFullYear();
+            return `${day}, ${dayOfMonth} ${month}`;
+        }
+
+        function confirmOrder() {
+            if (cart.length === 0) {
+            alert("Your cart is empty! Please add some items before placing an order.");
+            return;
+            }
+
+            const town = document.getElementById("town").value; // Get the selected town value
+            if (town === "" || town === "Select Town") { // Check if the user has selected a valid town
+            alert("Please select your town for delivery.");
+            return;
+            }
+            const mpesaNumber = document.getElementById("mpesa-number").value;
+            if (!mpesaNumber) {
+            alert("Please provide a valid Mpesa number.");
+            return;
+            }
+
+            alert("Order placed successfully! Your delivery will be made to your town.");
+        }
+        // Initialize Order Summary on page load
+        loadOrderSummary();
+    </script>
+</body>
+</html>

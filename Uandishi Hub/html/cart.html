@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uandishi Hub - Cart</title>
+    <style>
+           /* General Styles */
+           body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f4f9 0%, #e5e5f7 100%);
+            margin: 0;
+            padding: 0;
+        }
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background-color: #E3E6F3;
+            color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            left: 0;
+        }
+        .navbar .logo img {
+            width: 90px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2d2d2d;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: #088178;
+        }
+        .nav-links a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: #088178;
+            width: 0;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .login-button {
+            background-color: #f7c731;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #2d2d2d;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .login-button:hover {
+            background-color: #ffb81c;
+            transform: translateY(-2px);
+        }
+        
+        /* Cart Styling */
+        .cart-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .cart-empty {
+            font-size: 18px;
+            color: #555;
+        }
+        .cart-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-gap: 10px;
+        }
+        .cart-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .cart-item-details {
+            text-align: center;
+        }
+        .cart-item-details h3 {
+            font-size: 16px; 
+            margin: 0;
+        }
+        .cart-item-details p {
+            font-size: 14px;
+            margin: 5px 0 0;
+            color: #777;
+        }
+       /* Align remove button */
+        .remove-button {
+            margin-top: auto; /* Pushes the button to the bottom of the cart item container */
+            width: 100%;      /* Ensures the button takes full width of the container */
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .remove-button:hover {
+            background-color: #e60023;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* Checkout Button Styling */
+        .checkout-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .checkout-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Uandishi Hub Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html">Cart</a>
+            <a href="login.html" class="login-button">Login</a>
+        </nav>
+    </header>
+
+  
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <div id="cart-items" class="cart-grid">          
+            <p class="cart-empty">Your cart is currently empty.</p>
+        </div>
+        <div id="cart-total" class="cart-total"></div>     
+        <a href="checkout.html" class="checkout-button">Proceed to Checkout</a>
+    </div>
+    <script>     
+        function loadCartItems() {
+            const cartItemsContainer = document.getElementById("cart-items");
+            const cartTotalContainer = document.getElementById("cart-total");
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            
+            cartItemsContainer.innerHTML = ""; 
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="cart-empty">Your cart is currently empty.</p>';
+                cartTotalContainer.textContent = '';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+
+                const itemElement = document.createElement("div");
+                itemElement.classList.add("cart-item");
+
+                itemElement.innerHTML = `
+                    <img src="../images/${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: Ksh ${item.price}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                    </div>
+                    <button class="remove-button" onclick="removeFromCart('${item.name}')">Remove</button>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+            });
+            cartTotalContainer.textContent = `Total: Ksh ${total}`;
+        }
+
+        // Remove item from cart
+        function removeFromCart(itemName) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart = cart.filter(item => item.name !== itemName);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCartItems(); // Reload cart items
+        }
+
+        // Call loadCartItems when the page loads
+        window.onload = loadCartItems;
+    </script>
+
+</body>
+</html>

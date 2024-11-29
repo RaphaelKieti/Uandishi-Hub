@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uandishi Hub - Shop</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <script>
+        // Function to reset messages on page load
+        window.onload = function() {
+            let messageElements = document.getElementsByClassName('message');
+            for (let i = 0; i < messageElements.length; i++) {
+                messageElements[i].style.display = 'none';
+            }
+        };
+    
+        // JavaScript to handle Add to Cart functionality
+        function addToCart(itemName, price, quantity, imagePath) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+            const existingItemIndex = cart.findIndex(item => item.name === itemName);
+            if (existingItemIndex !== -1) {
+                // If item already exists in the cart, update quantity
+                cart[existingItemIndex].quantity += parseInt(quantity);
+            } else {
+                // Add new item to cart
+                cart.push({ name: itemName, price: price, quantity: parseInt(quantity), image: imagePath });
+            }
+    
+            // Save updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+    
+            // Display the message
+            let messageElement = document.getElementById(itemName.replace(/\s+/g, '-').toLowerCase() + '-message');
+            messageElement.style.display = 'block';
+    
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+    
+</head>
+<body>
+    <!-- Navigation Bar (same as Home page) -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Uandishi Hub Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html">Cart</a>
+            <a href="login.html" class="login-button">Login</a>
+        </nav>
+    </header>
+
+    <!-- Shop Page Content -->
+    <main>
+        <h1>Our Products</h1>
+        
+        <div class="shop-container">
+            <!-- Writing Tools -->
+            <div class="shop-item">
+                <img src="../images/ballpoint-pen.jpg" alt="Ballpoint Pen" />
+                <h3>Ballpoint Pen</h3>
+                <p>Description: Smooth writing experience, long-lasting ink.</p>
+                <p>Price: Ksh 100</p>
+                <input type="number" value="1" min="1" id="ballpoint-pen-quantity" />
+                <button onclick="addToCart('Ballpoint Pen', 100, document.getElementById('ballpoint-pen-quantity').value, 'ballpoint-pen.jpg')">Add to Cart</button>
+                <div id="ballpoint-pen-message" class="message">Item added to cart</div>
+            </div>
+            <div class="shop-item">
+                <img src="../images/gel-pen.jpeg" alt="Gel Pen" />
+                <h3>Gel Pen</h3>
+                <p>Description: Bright, vibrant ink for clean writing.</p>
+                <p>Price: Ksh 150</p>
+                <input type="number" value="1" min="1" id="gel-pen-quantity" />
+                <button onclick="addToCart('Gel Pen', 150, document.getElementById('gel-pen-quantity').value, 'gel-pen.jpeg')">Add to Cart</button>
+
+                <div id="gel-pen-message" class="message">Item added to cart</div>
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/highlighter.jpeg" alt="Highlighter" />
+                <h3>Highlighter</h3>
+                <p>Description: Neon colors for marking key information.</p>
+                <p>Price: Ksh 120</p>
+                <input type="number" value="1" min="1" id="highlighter-quantity" />
+                <button onclick="addToCart('Highlighter', 120, document.getElementById('highlighter-quantity').value, 'highlighter.jpeg')">Add to Cart</button>
+
+                <div id="highlighter-message" class="message">Item added to cart</div>
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/pencil.jpeg" alt="Pencil" />
+                <h3>Pencil</h3>
+                <p>Description: Soft lead pencil for drawing and writing.</p>
+                <p>Price: Ksh 50</p>
+                <input type="number" value="1" min="1" id="pencil-quantity" />
+                <button onclick="addToCart('Pencil', 50, document.getElementById('pencil-quantity').value, 'pencil.jpeg')">Add to Cart</button> 
+                <div id="pencil-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <!-- Notebooks -->
+            <div class="shop-item">
+                <img src="../images/spiral-notebook.jpeg" alt="Spiral Notebook" />
+                <h3>Spiral Notebook</h3>
+                <p>Description: Convenient for everyday notes and sketches.</p>
+                <p>Price: Ksh 300</p>
+                <input type="number" value="1" min="1" id="spiral-notebook-quantity" />
+                <button onclick="addToCart('Spiral Notebook', 300, document.getElementById('spiral-notebook-quantity').value, 'spiral-notebook.jpeg')">Add to Cart</button>
+                <div id="spiral-notebook-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/hardcover-notebook.jpeg" alt="Hardcover Notebook" />
+                <h3>Hardcover Notebook</h3>
+                <p>Description: Durable and perfect for journaling.</p>
+                <p>Price: Ksh 450</p>
+                <input type="number" value="1" min="1" id="hardcover-notebook-quantity" />
+                <button onclick="addToCart('Hardcover Notebook', 450, document.getElementById('hardcover-notebook-quantity').value, 'hardcover-notebook.jpeg')">Add to Cart</button>
+                <div id="hardcover-notebook-message" class="message">Item added to cart</div>
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/notepad.jpeg" alt="Notepad" />
+                <h3>Notepad</h3>
+                <p>Description: Ideal for quick notes and lists.</p>
+                <p>Price: Ksh 220</p>
+                <input type="number" value="1" min="1" id="notepad-quantity" />
+                <button onclick="addToCart('Notepad', 220, document.getElementById('notepad-quantity').value, 'notepad.jpeg')">Add to Cart</button>
+                <div id="notepad-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/sketchbook.jpeg" alt="Sketchbook" />
+                <h3>Sketchbook</h3>
+                <p>Description: Great for artists to draw and create.</p>
+                <p>Price: Ksh 350</p>
+                <input type="number" value="1" min="1" id="sketchbook-quantity" />
+                <button onclick="addToCart('Sketchbook', 350, document.getElementById('sketchbook-quantity').value, 'sketchbook.jpeg')">Add to Cart</button>
+                <div id="sketchbook-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <!-- Art Supplies -->
+            <div class="shop-item">
+                <img src="../images/colored-pencils.jpeg" alt="Colored Pencils" />
+                <h3>Colored Pencils</h3>
+                <p>Description: Set of vibrant colors for drawing.</p>
+                <p>Price: Ksh 200</p>
+                <input type="number" value="1" min="1" id="colored-pencils-quantity" />
+                <button onclick="addToCart('Colored Pencils', 200, document.getElementById('colored-pencils-quantity').value, 'colored-pencils.jpeg')">Add to Cart</button>
+                <div id="colored-pencils-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/watercolor-paints.jpeg" alt="Watercolor Paints" />
+                <h3>Watercolor Paints</h3>
+                <p>Description: Set of watercolor paints for artistic work.</p>
+                <p>Price: Ksh 400</p>
+                <input type="number" value="1" min="1" id="watercolor-paints-quantity" />
+                <button onclick="addToCart('Watercolor Paints', 400, document.getElementById('watercolor-paints-quantity').value, 'watercolor-paints.jpeg')">Add to Cart</button>
+                <div id="watercolor-paints-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/markers.jpeg" alt="Markers" />
+                <h3>Markers</h3>
+                <p>Description: Permanent markers in various colors.</p>
+                <p>Price: Ksh 250</p>
+                <input type="number" value="1" min="1" id="markers-quantity" />
+                <button onclick="addToCart('Markers', 250, document.getElementById('markers-quantity').value, 'markers.jpeg')">Add to Cart</button>
+                <div id="markers-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/brushes.jpeg" alt="Brushes" />
+                <h3>Brushes</h3>
+                <p>Description: Different sizes of brushes for painting.</p>
+                <p>Price: Ksh 150</p>
+                <input type="number" value="1" min="1" id="brushes-quantity" />
+                <button onclick="addToCart('Brushes', 150, document.getElementById('brushes-quantity').value, 'brushes.jpeg')">Add to Cart</button>
+                <div id="brushes-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <!-- Office Essentials -->
+            <div class="shop-item">
+                <img src="../images/sticky-notes.jpeg" alt="Sticky Notes" />
+                <h3>Sticky Notes</h3>
+                <p>Description: For reminders and quick notes.</p>
+                <p>Price: Ksh 80</p>
+                <input type="number" value="1" min="1" id="sticky-notes-quantity" />
+                <button onclick="addToCart('Sticky Notes', 80, document.getElementById('sticky-notes-quantity').value, 'sticky-notes.jpeg')">Add to Cart</button>
+                <div id="sticky-notes-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/folders.jpeg" alt="Folders" />
+                <h3>Folders</h3>
+                <p>Description: Perfect for organizing documents.</p>
+                <p>Price: Ksh 120</p>
+                <input type="number" value="1" min="1" id="folders-quantity" />
+                <button onclick="addToCart('Folders', 120, document.getElementById('folders-quantity').value, 'folders.jpeg')">Add to Cart</button>
+                <div id="folders-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/staplers.jpeg" alt="Stapler" />
+                <h3>Stapler</h3>
+                <p>Description: Stapler for binding papers together.</p>
+                <p>Price: Ksh 400</p>
+                <input type="number" value="1" min="1" id="stapler-quantity"/>
+                <button onclick="addToCart('Stapler', 400, document.getElementById('stapler-quantity').value, 'staplers.jpeg')">Add to Cart</button>
+                <div id="stapler-message" class="message">Item added to cart</div>
+
+            </div>
+
+            <div class="shop-item">
+                <img src="../images/paper-clips.jpeg" alt="Paper Clips" />
+                <h3>Paper Clips</h3>
+                <p>Description: Pack of paper clips for organizing papers.</p>
+                <p>Price: Ksh 50</p>
+                <input type="number" value="1" min="1" id="paper-clips-quantity" />
+                <button onclick="addToCart('Paper Clips', 50, document.getElementById('paper-clips-quantity').value, 'paper-clips.jpeg')">Add to Cart</button>
+                <div id="paper-clips-message" class="message">Item added to cart</div>
+
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Phone: 0758400416</p>
+                <p>Email: <a href="mailto:Uandishihub@gmail.com">Uandishihub@gmail.com</a></p>
+                <div class="social-media-icons">
+                    <a href="https://facebook.com" target="_blank"><img src="icons/facebook.png" alt="Facebook"></a>
+                    <a href="https://twitter.com" target="_blank"><img src="icons/twitter.png" alt="Twitter"></a>
+                    <a href="https://instagram.com" target="_blank"><img src="icons/instagram.png" alt="Instagram"></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Uandishi Hub is your one-stop shop for all stationery and creative needs. We provide top-quality tools to inspire your best work.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <form action="#">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Uandishi Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    
+</body>
+</html>

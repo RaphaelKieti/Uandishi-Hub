@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Uandishi Hub</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #f4f4f4; 
+            margin: 0; 
+            padding: 0; 
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background-color: #E3E6F3;
+            color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06 );
+            position: sticky;
+            top: 0;
+            left: 0;
+        }
+        .navbar .logo img {
+            width: 90px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2d2d2d;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: #088178;
+        }
+        .nav-links a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: #088178;
+            width: 0;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .login-button {
+            background-color: #f7c731;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #2d2d2d;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .login-button:hover {
+            background-color: #ffb81c;
+            transform: translateY(-2px);
+        }
+        .container { 
+            padding: 20px 50px; 
+            max-width: 1000px; 
+            margin: auto; 
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            border-radius: 8px; 
+            text-align: center;
+        }
+        .header {
+            background: #E3E6F3;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+        }
+        h1 { 
+            color: #333; 
+        }
+        h2 {
+            color: #0078D4;
+        }
+        .mission, .values, .team, .services {
+            margin: 30px 0;
+        }
+        .mission p, .values p, .services p {
+            background: #e0f7fa;
+            padding: 15px;
+            border-radius: 5px;
+            color: #00796b;
+        }
+        .team img { 
+            border-radius: 50%; 
+            width: 150px; 
+            height: 150px;
+            object-fit: cover; 
+            margin: 10px;
+            border: 2px solid #E3E6F3; 
+        }
+        .team-member {
+            display: inline-block;
+            text-align: center;
+        }
+        .team-member h3 {
+            margin: 10px 0 5px 0;
+            color: #0078D4;
+        }
+        .team-member p {
+            margin: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Uandishi Hub Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html">Cart</a>
+            <a href="login.html" class="login-button">Login</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="header">
+            <h1>About Uandishi Hub</h1>
+        </div>
+        <section class="mission">
+            <h2>Our Mission</h2>
+            <p>At Uandishi Hub, we aim to empower creativity and facilitate expression through high-quality stationery products. We believe that everyone has a story to tell, and our mission is to provide the tools that make the writing process a joy.</p>
+        </section>
+        <section class="values">
+            <h2>Our Values</h2>
+            <p>We are committed to quality, innovation, and customer satisfaction. Our values drive everything we do, ensuring that our products are not only functional but also inspire creativity and excellence.</p>
+        </section>
+        <section class="team">
+            <h2>Meet Our Team</h2>
+            <div class="team-member">
+                <img src="../images/member1.jpg" alt="Raphael Kyalo">
+                <h3>Raphael Kyalo</h3>
+                <p>Co-Founder & CEO</p>
+            </div>
+            <div class="team-member">
+                <img src="../images/member2.jpg" alt="John Nzola">
+                <h3>John Nzola</h3>
+                <p>Chief Operating Officer</p>
+            </div>
+            <div class="team-member">
+                <img src="../images/member3.jpg" alt="Dominic Kalii">
+                <h3>Dominic Kalii</h3>
+                <p>Head of Marketing</p>
+            </div>
+            <div class="team-member">
+                <img src="../images/member4.jpg" alt="Mordecai Mwendwa">
+                <h3>Mordecai Mwendwa</h3>
+                <p>Product Manager</p>
+            </div>
+            <div class="team-member">
+                <img src="../images/member5.jpg" alt="Joseph Munyao">
+                <h3>Joseph Munyao</h3>
+                <p>Technical Lead</p>
+            </div>
+        </section>
+        <section class="services">
+            <h2>Our Services</h2>
+            <p>From notebooks and pens to custom stationery and office supplies, Uandishi Hub offers a wide range of products to cater to all your writing needs. We also provide personalized services to help you create unique stationery that reflects your style.</p>
+        </section>
+    </div>
+</body>
+</html>

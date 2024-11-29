@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Uandishi Hub</title>
+    <style>
+        body { 
+            font-family: 'Roboto', Arial, sans-serif; 
+            background: #f4f4f4; 
+            margin: 0; 
+            padding: 0; 
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background-color: #E3E6F3;
+            color: #2d2d2d;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            left: 0;
+        }
+        .navbar .logo img {
+            width: 90px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2d2d2d;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: #088178;
+        }
+        .nav-links a::after {
+            content: '';
+            display: block;
+            height: 2px;
+            background: #088178;
+            width: 0;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .login-button {
+            background-color: #f7c731;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #2d2d2d;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .login-button:hover {
+            background-color: #ffb81c;
+            transform: translateY(-2px);
+        }
+        .container { 
+            padding: 20px 50px; 
+            max-width: 1000px; 
+            margin: auto; 
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            border-radius: 8px; 
+            text-align: center;
+        }
+        .header {
+            background: #E3E6F3;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+        }
+        h1 { 
+            color: #333; 
+        }
+        .contact-info, .contact-form {
+            margin: 30px 0;
+        }
+        .contact-info p {
+            background: #e0f7fa;
+            padding: 15px;
+            border-radius: 5px;
+            color: #00796b;
+        }
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .input-group {
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .input-group textarea {
+            resize: vertical;
+        }
+        .button {
+            background: #f7c731;
+            color: #2d2d2d;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background: #d4a828;
+        }
+        footer {
+            background: #2d2d2d;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="../images/logo.png" alt="Uandishi Hub Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html">Cart</a>
+            <a href="login.html" class="login-button">Login</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="header">
+            <h1>Contact Us</h1>
+        </div>
+        <section class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>Email: contact@uandishihub.com</p>
+            <p>Phone: +254 758 400 416</p>
+        </section>
+        <section class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form id="contactForm">
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="button" class="button" onclick="submitForm()">Send</button>
+            </form>
+        </section>
+    </div>
+    <footer>
+        <p>© 2024 Uandishi Hub. All rights reserved.</p>
+        <p>Contact: 0758 400 416 | Email: uandishihub@gmail.com</p>
+    </footer>
+    <script>
+        function submitForm() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name) {
+                alert("Please enter your name.");
+            } else if (!email) {
+                alert("Please enter your email.");
+            } else if (!message) {
+                alert("Please write a message.");
+            } else {
+                alert("Message sent successfully!");
+                document.getElementById("contactForm").reset(); // Reset the form
+            }
+        }
+    </script>
+</body>
+</html>
